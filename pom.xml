@@ -16,7 +16,7 @@
 	<description>Online shop</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 		<start-class>com.example.onlineshop</start-class>
 	</properties>
 

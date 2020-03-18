@@ -3,6 +3,7 @@ package com.example.onlineshop.api;
 
 import com.example.onlineshop.entity.Cart;
 import com.example.onlineshop.entity.ProductInOrder;
+import com.example.onlineshop.entity.ProductInfo;
 import com.example.onlineshop.entity.User;
 import com.example.onlineshop.form.ItemForm;
 import com.example.onlineshop.repository.ProductInOrderRepository;
@@ -53,7 +54,7 @@ public class CartController {
 
     @PostMapping("/add")
     public boolean addToCart(@RequestBody ItemForm form, Principal principal) {
-        var productInfo = productService.findOne(form.getProductId());
+        ProductInfo productInfo = productService.findOne(form.getProductId());
         try {
             mergeCart(Collections.singleton(new ProductInOrder(productInfo, form.getQuantity())), principal);
         } catch (Exception e) {
