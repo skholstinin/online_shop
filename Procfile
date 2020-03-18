@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/online_shop/*.war online_shop
+web: java $JAVA_OPTS target/online_shop-0.0.1-SNAPSHOT.jar
