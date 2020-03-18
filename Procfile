@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS target/online_shop-0.0.1-SNAPSHOT.war
+web: java -jar target/classes/:target/dependency/* com.example.onlineshop.api.UserController
