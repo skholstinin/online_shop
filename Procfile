@@ -1,1 +1,1 @@
-web: java
+web: java -jar target/my-demo-online-shop.jar
