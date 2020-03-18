@@ -12,21 +12,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
 @CrossOrigin
 @RestController
-@Component
 public class UserController {
 
     @Autowired
     UserService userService;
 
-//    @Autowired
-//    AuthenticationManager authenticationManager;
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @GetMapping(value = "/")
     public String getIndex() {
@@ -36,17 +34,16 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<HttpStatus> login(@RequestBody LoginForm loginForm) {
-        return ResponseEntity.status(HttpStatus.FOUND).build();
-//        try {
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//            User user = userService.findOne(userDetails.getUsername());
-//            return ResponseEntity.status(HttpStatus.FOUND).build();
-//        } catch (AuthenticationException e) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        }
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            User user = userService.findOne(userDetails.getUsername());
+            return ResponseEntity.status(HttpStatus.FOUND).build();
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
 

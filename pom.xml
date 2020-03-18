@@ -17,7 +17,7 @@
 
     <properties>
         <java.version>8</java.version>
-        <start-class>com.example.onlineshop</start-class>
+        <!--        <start-class>com.example.onlineshop</start-class>-->
     </properties>
 
     <dependencies>
@@ -124,5 +124,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
