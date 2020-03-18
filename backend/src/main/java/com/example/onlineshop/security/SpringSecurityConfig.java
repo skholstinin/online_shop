@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -74,12 +75,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webResources/**",
                         "/app/**").permitAll()
                 .antMatchers("/**").authenticated()
-                .and().formLogin()
-                .loginPage("/login").permitAll()
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/accessDenied");
+                .and().formLogin(Customizer.withDefaults())
+                .httpBasic();
+
+//                .loginPage("/login").permitAll()
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .and().csrf()
+//                .and().exceptionHandling().accessDeniedPage("/accessDenied");
 
         http.sessionManagement()
                 .maximumSessions(100)
